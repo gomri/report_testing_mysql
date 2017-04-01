@@ -15,10 +15,12 @@ min_time_stamp = """
   """
 
 test = """
-	SELECT 
-	    COUNT(*), MAX(date_interval), SUM(revenue)
-	FROM
-	    reports_daily_est
-	WHERE
-	    Actual_Date = CURDATE()
+    SELECT 
+    entity_name, date_interval, SUM(imps), SUM(revenue)
+FROM
+    onetag.reports_daily_est
+WHERE
+    date_interval BETWEEN CURDATE() - 5 AND CURDATE() - 1
+and entity_id = 102
+GROUP BY date_interval , entity_name
 """
