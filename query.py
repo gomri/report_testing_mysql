@@ -8,12 +8,13 @@ def create_connections():
     return cursor
 
 
-def execute_query(cursor, query):
+def execute_query(cursor, query, entity_name):
     today = date.today()
     start_date = today - timedelta(5)
     end_date = today - timedelta(1)
     try:
-        cursor.execute(query.format(start_date,end_date))
+        cursor.execute(query.format(start_date,end_date,entity_name))
+        # print query.format(start_date,end_date,entity_name)
     except Exception as e:
         raise e  # TODO add a log level error with HIGH priority.
     return cursor
@@ -30,19 +31,22 @@ def fetch_data(cursor):
         return query_response
 
 
-def convert_to_dict(data):
-    OpenX_dict = {}
+def convert_to_dict(data,entity_name):
+    result_dict = {}
     for i in range(len(data)):
         for ii in range(len(data[i])):
-            if data[i][0] == "OpenX":
+            if data[i][0] == entity_name:
                 temp_dict = {
-                    data[i][1]: {
-                        "IMPs": data[i][2],
-                        "Rev": data[i][3]
+                    data[i][0]:{
+                        data[i][1]: {
+                            "IMPs": data[i][2],
+                            "Rev": data[i][3]
+                        }
                     }
                 }
-                OpenX_dict.update(temp_dict)
-    return OpenX_dict
+                result_dict.update(temp_dict)
+                print temp_dict
+    return result_dict
 
 def close_connections(cursor):
     cursor.close()
@@ -50,8 +54,39 @@ def close_connections(cursor):
 
 
 cursor = create_connections()
-execute_query(cursor, query=test)
-# execute_query(cursor,min_time_stamp)
-result = fetch_data(cursor)
-print convert_to_dict(result)
+
+
+# execute_query(cursor, query=test)
+
+
+
+all_entity_dict = {}
+for entity in range(len(entity_names)):
+
+    execute_query(cursor, test,entity_names[entity])
+
+    result = fetch_data(cursor)
+
+    result_dict = convert_to_dict(result,entity_names[entity])
+
+    all_entity_dict.update(result_dict)
+
+print all_entity_dict
+
 close_connections(cursor)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
