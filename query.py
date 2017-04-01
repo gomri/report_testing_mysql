@@ -1,5 +1,5 @@
 import DB_connector
-import json
+from datetime import date, timedelta
 from Vars import *
 
 
@@ -9,8 +9,11 @@ def create_connections():
 
 
 def execute_query(cursor, query):
+    today = date.today()
+    start_date = today - timedelta(5)
+    end_date = today - timedelta(1)
     try:
-        cursor.execute(query)
+        cursor.execute(query.format(start_date,end_date))
     except Exception as e:
         raise e  # TODO add a log level error with HIGH priority.
     return cursor
@@ -41,11 +44,6 @@ def convert_to_dict(data):
                 OpenX_dict.update(temp_dict)
     return OpenX_dict
 
-
-# def convert_to_json(data):
-#     d = json.dumps(data)
-#     return d
-
 def close_connections(cursor):
     cursor.close()
     DB_connector.cnx.close()
@@ -55,5 +53,5 @@ cursor = create_connections()
 execute_query(cursor, query=test)
 # execute_query(cursor,min_time_stamp)
 result = fetch_data(cursor)
-result_dict = convert_to_dict(result)
+print convert_to_dict(result)
 close_connections(cursor)

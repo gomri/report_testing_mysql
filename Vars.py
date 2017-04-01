@@ -20,7 +20,34 @@ test = """
 FROM
     onetag.reports_daily_est
 WHERE
-    date_interval BETWEEN CURDATE() - 5 AND CURDATE() - 1
+    date_interval BETWEEN "{0}" AND "{1}"
 and entity_id = 102
 GROUP BY date_interval , entity_name
 """
+
+entity_names = [
+    "OpenX",
+    "Admeta PWF"
+    "Adx",
+    "AOL-America"
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

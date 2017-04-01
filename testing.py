@@ -23,7 +23,7 @@
 
 #----------------------------------------------------------------
 
-
+from datetime import date, timedelta
 import json
 
 OpenX = [
@@ -36,4 +36,9 @@ OpenX = [
 x = json.dumps(OpenX)
 y = json.loads(x)
 
+'2017-04-01 00:00:00'
+
+x = date.today() - timedelta(5)
+
+print x.strftime("%Y-%m-%d %H:%M:%S")
 
