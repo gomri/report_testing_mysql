@@ -1,4 +1,1 @@
-from query import *
-
-#def compare(list1, list2):
-
+from query import list_of_result_dicts

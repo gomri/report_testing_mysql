@@ -71,7 +71,7 @@ for entity in range(len(entity_names)):
 
     all_entity_list.append(result_dict)
 
-print all_entity_list
+list_of_result_dicts = all_entity_list
 
 close_connections(cursor)
 
