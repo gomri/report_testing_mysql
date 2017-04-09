@@ -45,7 +45,7 @@ def convert_to_dict(data,entity_name):
                     }
                 }
                 result_dict.update(temp_dict)
-                print temp_dict
+                # print temp_dict
     return result_dict
 
 def close_connections(cursor):
@@ -60,7 +60,7 @@ cursor = create_connections()
 
 
 
-all_entity_dict = {}
+all_entity_list = []
 for entity in range(len(entity_names)):
 
     execute_query(cursor, test,entity_names[entity])
@@ -69,24 +69,9 @@ for entity in range(len(entity_names)):
 
     result_dict = convert_to_dict(result,entity_names[entity])
 
-    all_entity_dict.update(result_dict)
+    all_entity_list.append(result_dict)
 
-print all_entity_dict
+print all_entity_list
 
 close_connections(cursor)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
