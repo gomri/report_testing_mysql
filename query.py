@@ -13,7 +13,7 @@ def serving_24_hours(cursor, query):
         start_date = generat_date(2)
         end_date = generat_date(1)
 
-        cursor.execute(query.format(start_date, end_date))
+        cursor.execute(query.format(start_date, start_date))
         return cursor
     except Exception as e:
         raise e
@@ -69,8 +69,6 @@ cursor = create_connections()
 
 cursor = serving_24_hours(cursor, query_serving_24_hours)
 
-result = fetch_data(cursor)
-
-print result
+result_24_hour_serving = fetch_data(cursor)
 
 close_connections(cursor)
