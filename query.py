@@ -8,26 +8,27 @@ def create_connections():
     return cursor
 
 
-def serving_24_hours(cursor,query):
-	try:
-		start_date = generat_date(2)
-		end_date = generat_date(1)
+def serving_24_hours(cursor, query):
+    try:
+        start_date = generat_date(2)
+        end_date = generat_date(1)
 
-		cursor.execute(query.format(start_date,end_date))
-		return cursor
-	except Exception as e:
-		raise e
+        cursor.execute(query.format(start_date, end_date))
+        return cursor
+    except Exception as e:
+        raise e
+
 
 def imps_rev_last_5_days(cursor, query, entity_name):
-		try:
-			start_date = today
-			end_date = generat_date(5)
+    try:
+        start_date = today
+        end_date = generat_date(5)
 
-			cursor.execute(query.format(start_date,end_date,entity_name))
-			return cursor	
-		except Exception as e:
-    			raise e  # TODO add a log level error with HIGH priority.
-		
+        cursor.execute(query.format(start_date, end_date, entity_name))
+        return cursor
+    except Exception as e:
+        raise e  # TODO add a log level error with HIGH priority.
+
 
 def fetch_data(cursor):
     row = cursor.fetchall()
