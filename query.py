@@ -13,7 +13,7 @@ def serving_24_hours(cursor, query):
         start_date = generat_date(2)
         end_date = generat_date(1)
 
-        cursor.execute(query.format(start_date, start_date))
+        cursor.execute(query.format(start_date, end_date))
         return cursor
     except Exception as e:
         raise e

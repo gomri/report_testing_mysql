@@ -23,22 +23,10 @@
 
 #----------------------------------------------------------------
 
-from datetime import date, timedelta
-import json
+import logging
+logging.basicConfig(filename='example.log',level=logging.DEBUG)
+logging.debug('This message should go to the log file')
+logging.info('So should this')
+logging.warning('And this, too')
 
-OpenX = [
-    ["OpenX", "Date1",125,10],
-    ["OpenX", "Date2",150,15],
-    ["OpenX", "Date3",175,20],
-    ["OpenX", "Date4",200,30]
-]
-
-x = json.dumps(OpenX)
-y = json.loads(x)
-
-'2017-04-01 00:00:00'
-
-x = date.today() - timedelta(5)
-
-print x.strftime("%Y-%m-%d %H:%M:%S")
 

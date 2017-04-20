@@ -1,7 +1,6 @@
 from query import *
 
 def check_24_hours_serving(alist):
-    print len(alist)
     if len(alist) == 24:
         test_result = True
         return test_result
