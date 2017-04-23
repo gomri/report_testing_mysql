@@ -1,0 +1,5 @@
+2017-04-23 15:44:53,256 - INFO - connection successful
+2017-04-23 15:48:50,627 - CRITICAL - 2003: Can't connect to MySQL server on '10.25.79.77:3306' (10060 A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
+2017-04-23 15:52:14,358 - CRITICAL - 2003: Can't connect to MySQL server on '10.25.79.77:3306' (10060 A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
+2017-04-23 15:52:14,368 - CRITICAL - 'module' object has no attribute 'cnx'
+2017-04-23 15:52:14,368 - CRITICAL - 'NoneType' object has no attribute 'execute'

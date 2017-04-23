@@ -1,11 +1,14 @@
 import DB_connector
 from Vars import *
 from utilities import *
-
+from Appliaction_logging import *
 
 def create_connections():
-    cursor = DB_connector.cnx.cursor(buffered=True)
-    return cursor
+    try:
+        cursor = DB_connector.cnx.cursor(buffered=True)
+        return cursor
+    except Exception as e:
+        logging.critical(e)
 
 
 def serving_24_hours(cursor, query):
@@ -16,6 +19,7 @@ def serving_24_hours(cursor, query):
         cursor.execute(query.format(start_date, end_date))
         return cursor
     except Exception as e:
+        logging.critical(e)
         raise e
 
 
@@ -27,13 +31,14 @@ def imps_rev_last_5_days(cursor, query, entity_name):
         cursor.execute(query.format(start_date, end_date, entity_name))
         return cursor
     except Exception as e:
-        raise e  # TODO add a log level error with HIGH priority.
+        logging.critical(e)
+        raise e
 
 
 def fetch_data(cursor):
     row = cursor.fetchall()
-    if row is None:  # TODO: add a logger level error with HIGH priority.
-        print 'No data was returned by query'
+    if row is None:
+        logging.critical('No data was returned by query')
     elif row is not None:
         while row is not None:
             query_response = list(row)
@@ -57,6 +62,7 @@ def fetch_data(cursor):
 #                 result_dict.update(temp_dict)
 #                 # print temp_dict
 #     return result_dict
+
 
 def close_connections(cursor):
     cursor.close()
