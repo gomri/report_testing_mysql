@@ -73,8 +73,9 @@ cursor = create_connections()
 
 # imps_rev_last_5_days(cursor, test, entity_names[0])
 
+# ----------------------------- 24 hour serving test --------------
 cursor = serving_24_hours(cursor, query_serving_24_hours)
 
 result_24_hour_serving = fetch_data(cursor)
-
+#------------------------------------------------------------------
 close_connections(cursor)

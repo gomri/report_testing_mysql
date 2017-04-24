@@ -4,7 +4,7 @@ max_time_stamp = """
      MAX(Date_interval)
    FROM
      onetag.reports
-  """
+"""
 
 min_time_stamp = """
    SELECT 
@@ -12,7 +12,7 @@ min_time_stamp = """
      MIN(Date_interval)
    FROM
      onetag.reports
-  """
+"""
 
 query_serving_24_hours = """
 SELECT 
