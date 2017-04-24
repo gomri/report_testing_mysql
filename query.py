@@ -89,18 +89,17 @@ result_imps_rev_last_5_days = fetch_data(cursor)
 # print result_imps_rev_last_5_days
 
 
-lst2 = [item[3] for item in result_imps_rev_last_5_days]
-counter = 0
-for element in lst2[:-1]:
-    counter = counter + element
-avrg_4_days = (counter/len(lst2[:-1]))/4
-
-yesterdays_rev = lst2[-1]
-
-print avrg_4_days
-print yesterdays_rev
-
-print round(((avrg_4_days/yesterdays_rev)/yesterdays_rev)*100,2)
+for i in range(2):
+    if i == 0:
+        lst2 = [item[2] for item in result_imps_rev_last_5_days]
+        avrg_4_days_rev = (sum(lst2[:-1]) / len(lst2[:-1])) / 4
+        yesterdays_rev = lst2[-1]
+        imps_last_5_days_delta = round(((avrg_4_days_rev / yesterdays_rev) / yesterdays_rev) * 100, 2)
+    elif i == 1:
+        lst3 = [item[3] for item in result_imps_rev_last_5_days]
+        avrg_4_days_imps = (sum(lst3[:-1]) / len(lst3[:-1])) / 4
+        yesterdays_imps = lst3[-1]
+        rev_last_5_days_delta = round(((avrg_4_days_imps / yesterdays_imps) / yesterdays_imps) * 100, 2)
 
 
 # cursor = serving_24_hours(cursor, query_serving_24_hours)

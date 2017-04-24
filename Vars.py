@@ -44,3 +44,5 @@ entity_names = [
     "Adx",
     "AOL-America"
 ]
+
+min_delta = 0.3
