@@ -5,8 +5,7 @@ from Appliaction_logging import *
 try:
     cnx = mysql.connector.connect(user='omrig',
                                   password='zUAv5hsG',
-                                  host='10.25.79.77',
-                                  #'10.0.32.33',
+                                  host='10.0.32.33',
                                   database='onetag')
 except mysql.connector.Error as err:
     if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:

@@ -1,9 +1,12 @@
-max_time_stamp = """
-   SELECT 
-     MAX(id),
-     MAX(Date_interval)
-   FROM
-     onetag.reports
+testing = """
+SELECT 
+    entity_name, date_interval, SUM(imps), SUM(revenue)
+FROM
+    onetag.reports_daily_est
+WHERE
+    date_interval BETWEEN '2017-03-26' AND '2017-03-31'
+and entity_name = 'AOL-america'
+GROUP BY date_interval , entity_name
   """
 
 min_time_stamp = """
@@ -25,7 +28,7 @@ GROUP BY 1
 """
 
 query_imps_rev_last_days_5 = """
-    SELECT 
+SELECT 
     entity_name, date_interval, SUM(imps), SUM(revenue)
 FROM
     onetag.reports_daily_est

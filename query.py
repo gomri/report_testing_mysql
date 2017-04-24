@@ -3,6 +3,7 @@ from Vars import *
 from utilities import *
 from Appliaction_logging import *
 
+
 def create_connections():
     try:
         cursor = DB_connector.cnx.cursor(buffered=True)
@@ -28,7 +29,17 @@ def imps_rev_last_5_days(cursor, query, entity_name):
         start_date = today
         end_date = generat_date(5)
 
-        cursor.execute(query.format(start_date, end_date, entity_name))
+        # print query.format(start_date, end_date, entity_name)
+        """
+        
+        """
+        cursor.execute(query.format
+            (
+            end_date,
+            start_date,
+            entity_name
+            )
+        )
         return cursor
     except Exception as e:
         logging.critical(e)
@@ -37,7 +48,7 @@ def imps_rev_last_5_days(cursor, query, entity_name):
 
 def fetch_data(cursor):
     row = cursor.fetchall()
-    if row is None:
+    if row is None or row == []:
         logging.critical('No data was returned by query')
     elif row is not None:
         while row is not None:
@@ -71,10 +82,29 @@ def close_connections(cursor):
 
 cursor = create_connections()
 
-# imps_rev_last_5_days(cursor, test, entity_names[0])
+imps_rev_last_5_days(cursor, query_imps_rev_last_days_5, entity_names[0])
 
-cursor = serving_24_hours(cursor, query_serving_24_hours)
+result_imps_rev_last_5_days = fetch_data(cursor)
 
-result_24_hour_serving = fetch_data(cursor)
+# print result_imps_rev_last_5_days
+
+
+lst2 = [item[3] for item in result_imps_rev_last_5_days]
+counter = 0
+for element in lst2[:-1]:
+    counter = counter + element
+avrg_4_days = (counter/len(lst2[:-1]))/4
+
+yesterdays_rev = lst2[-1]
+
+print avrg_4_days
+print yesterdays_rev
+
+print round(((avrg_4_days/yesterdays_rev)/yesterdays_rev)*100,2)
+
+
+# cursor = serving_24_hours(cursor, query_serving_24_hours)
+#
+# result_24_hour_serving = fetch_data(cursor)
 
 close_connections(cursor)

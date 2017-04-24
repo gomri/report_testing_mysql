@@ -1,5 +1,55 @@
-2017-04-23 15:44:53,256 - INFO - connection successful
-2017-04-23 15:48:50,627 - CRITICAL - 2003: Can't connect to MySQL server on '10.25.79.77:3306' (10060 A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
-2017-04-23 15:52:14,358 - CRITICAL - 2003: Can't connect to MySQL server on '10.25.79.77:3306' (10060 A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
-2017-04-23 15:52:14,368 - CRITICAL - 'module' object has no attribute 'cnx'
-2017-04-23 15:52:14,368 - CRITICAL - 'NoneType' object has no attribute 'execute'
+2017-04-24 15:17:29,056 - INFO - connection successful
+2017-04-24 15:17:29,657 - CRITICAL - No data was returned by query
+2017-04-24 15:17:45,678 - INFO - connection successful
+2017-04-24 15:17:46,273 - CRITICAL - No data was returned by query
+2017-04-24 15:18:15,676 - INFO - connection successful
+2017-04-24 15:18:16,226 - CRITICAL - No data was returned by query
+2017-04-24 15:18:32,961 - INFO - connection successful
+2017-04-24 15:18:33,482 - CRITICAL - 1146 (42S02): Table 'onetag.report' doesn't exist
+2017-04-24 15:18:52,082 - INFO - connection successful
+2017-04-24 15:18:52,601 - CRITICAL - No data was returned by query
+2017-04-24 15:20:18,256 - INFO - connection successful
+2017-04-24 15:20:18,746 - CRITICAL - No data was returned by query
+2017-04-24 15:20:28,826 - INFO - connection successful
+2017-04-24 15:20:29,496 - CRITICAL - No data was returned by query
+2017-04-24 15:26:07,058 - INFO - connection successful
+2017-04-24 15:27:43,572 - INFO - connection successful
+2017-04-24 15:27:44,072 - CRITICAL - No data was returned by query
+2017-04-24 15:30:36,065 - INFO - connection successful
+2017-04-24 15:30:36,421 - CRITICAL - tuple index out of range
+2017-04-24 15:31:26,602 - INFO - connection successful
+2017-04-24 15:31:26,954 - CRITICAL - tuple index out of range
+2017-04-24 15:31:57,828 - INFO - connection successful
+2017-04-24 15:31:58,177 - CRITICAL - tuple index out of range
+2017-04-24 15:32:11,191 - INFO - connection successful
+2017-04-24 15:33:29,691 - INFO - connection successful
+2017-04-24 15:44:53,868 - INFO - connection successful
+2017-04-24 15:47:50,375 - INFO - connection successful
+2017-04-24 15:51:34,232 - INFO - connection successful
+2017-04-24 15:51:45,717 - INFO - connection successful
+2017-04-24 16:05:54,375 - INFO - connection successful
+2017-04-24 16:11:31,765 - INFO - connection successful
+2017-04-24 16:11:54,259 - INFO - connection successful
+2017-04-24 16:12:22,130 - INFO - connection successful
+2017-04-24 16:15:14,546 - INFO - connection successful
+2017-04-24 16:16:30,029 - INFO - connection successful
+2017-04-24 16:17:06,617 - INFO - connection successful
+2017-04-24 16:25:30,224 - INFO - connection successful
+2017-04-24 16:34:51,953 - INFO - connection successful
+2017-04-24 16:35:25,763 - INFO - connection successful
+2017-04-24 16:35:45,368 - INFO - connection successful
+2017-04-24 16:36:11,325 - INFO - connection successful
+2017-04-24 16:43:17,066 - INFO - connection successful
+2017-04-24 16:43:35,818 - INFO - connection successful
+2017-04-24 16:44:02,914 - INFO - connection successful
+2017-04-24 16:44:53,444 - INFO - connection successful
+2017-04-24 16:47:54,575 - INFO - connection successful
+2017-04-24 16:48:12,130 - INFO - connection successful
+2017-04-24 16:49:07,191 - INFO - connection successful
+2017-04-24 16:49:19,992 - INFO - connection successful
+2017-04-24 16:49:28,493 - INFO - connection successful
+2017-04-24 16:50:42,624 - INFO - connection successful
+2017-04-24 16:53:39,367 - INFO - connection successful
+2017-04-24 16:53:46,312 - INFO - connection successful
+2017-04-24 16:54:14,756 - INFO - connection successful
+2017-04-24 16:54:23,740 - INFO - connection successful
