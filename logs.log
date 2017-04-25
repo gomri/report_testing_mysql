@@ -1,20 +1,56 @@
-Criteo 
-OpenX
-Adx
-AOL-America
-Smart
-DFP
-AOL-APAC
-Admeta PWF
-OpenXMA
-Brightcom
-
-11
-101
-102
-109
-110
-120
-125
-117
-7
+2017-04-25 14:33:20,490 - CRITICAL - 'module' object has no attribute 'cnx'
+2017-04-25 14:33:20,490 - CRITICAL - 'NoneType' object has no attribute 'execute'
+2017-04-25 14:34:31,822 - CRITICAL - 'module' object has no attribute 'cnx'
+2017-04-25 14:34:31,822 - CRITICAL - 'NoneType' object has no attribute 'execute'
+2017-04-25 14:36:30,750 - CRITICAL - 'module' object has no attribute 'cnx'
+2017-04-25 14:36:30,750 - CRITICAL - 'NoneType' object has no attribute 'execute'
+2017-04-25 14:36:51,311 - CRITICAL - 'module' object has no attribute 'cnx'
+2017-04-25 14:36:51,311 - CRITICAL - 'NoneType' object has no attribute 'execute'
+2017-04-25 14:38:42,572 - CRITICAL - 'module' object has no attribute 'cnx'
+2017-04-25 14:38:42,572 - CRITICAL - 'NoneType' object has no attribute 'execute'
+2017-04-25 14:39:31,082 - CRITICAL - 'module' object has no attribute 'cnx'
+2017-04-25 14:39:31,082 - CRITICAL - 'NoneType' object has no attribute 'execute'
+2017-04-25 14:39:34,509 - CRITICAL - 'module' object has no attribute 'cnx'
+2017-04-25 14:39:34,509 - CRITICAL - 'NoneType' object has no attribute 'execute'
+2017-04-25 14:42:18,756 - CRITICAL - 'module' object has no attribute 'cnx'
+2017-04-25 14:42:18,756 - CRITICAL - 'NoneType' object has no attribute 'execute'
+2017-04-25 14:46:16,664 - CRITICAL - 'module' object has no attribute 'cnx'
+2017-04-25 14:46:16,674 - CRITICAL - global name 'entity_name' is not defined
+2017-04-25 14:47:00,993 - CRITICAL - 'module' object has no attribute 'cnx'
+2017-04-25 14:47:00,993 - CRITICAL - 'NoneType' object has no attribute 'execute'
+2017-04-25 14:47:09,996 - CRITICAL - 'module' object has no attribute 'cnx'
+2017-04-25 14:47:09,996 - CRITICAL - 'NoneType' object has no attribute 'execute'
+2017-04-25 14:47:47,469 - CRITICAL - 'module' object has no attribute 'cnx'
+2017-04-25 14:47:47,469 - CRITICAL - 'NoneType' object has no attribute 'execute'
+2017-04-25 14:47:51,176 - CRITICAL - 'module' object has no attribute 'cnx'
+2017-04-25 14:47:51,176 - CRITICAL - 'NoneType' object has no attribute 'execute'
+2017-04-25 14:48:34,023 - CRITICAL - 'module' object has no attribute 'cnx'
+2017-04-25 14:48:34,023 - CRITICAL - 'NoneType' object has no attribute 'execute'
+2017-04-25 14:49:38,757 - CRITICAL - 'module' object has no attribute 'cnx'
+2017-04-25 14:51:46,930 - INFO - connection successful
+2017-04-25 14:52:08,012 - INFO - connection successful
+2017-04-25 14:52:08,894 - CRITICAL - No data was returned by query
+2017-04-25 14:54:09,592 - INFO - connection successful
+2017-04-25 14:54:10,092 - CRITICAL - No data was returned by query
+2017-04-25 14:54:52,500 - INFO - connection successful
+2017-04-25 14:54:52,990 - CRITICAL - No data was returned by query
+2017-04-25 14:55:31,019 - INFO - connection successful
+2017-04-25 14:56:00,509 - INFO - connection successful
+2017-04-25 14:57:36,431 - INFO - connection successful
+2017-04-25 14:57:59,694 - INFO - connection successful
+2017-04-25 14:58:22,260 - INFO - connection successful
+2017-04-25 14:58:47,387 - INFO - connection successful
+2017-04-25 15:00:26,194 - INFO - connection successful
+2017-04-25 15:01:28,148 - INFO - connection successful
+2017-04-25 15:02:04,766 - INFO - connection successful
+2017-04-25 15:02:46,961 - INFO - connection successful
+2017-04-25 15:03:16,457 - INFO - connection successful
+2017-04-25 15:03:32,994 - INFO - connection successful
+2017-04-25 15:03:50,295 - INFO - connection successful
+2017-04-25 15:04:00,848 - INFO - connection successful
+2017-04-25 15:04:31,703 - INFO - connection successful
+2017-04-25 15:05:13,506 - INFO - connection successful
+2017-04-25 15:05:36,336 - INFO - connection successful
+2017-04-25 15:06:06,894 - INFO - connection successful
+2017-04-25 15:07:50,470 - INFO - connection successful
+2017-04-25 15:12:31,250 - INFO - connection successful

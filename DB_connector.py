@@ -1,11 +1,11 @@
 import mysql.connector
 from mysql.connector import errorcode
-from Appliaction_logging import *
+from Logger import *
 
 try:
     cnx = mysql.connector.connect(user='omrig',
                                   password='zUAv5hsG',
-                                  host='10.0.32.223', # Slave
+                                  host='10.0.32.223',  # Slave
                                   # Master '10.0.32.33',
                                   database='onetag')
 except mysql.connector.Error as err:
