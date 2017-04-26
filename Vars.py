@@ -1,10 +1,10 @@
 testing = """
 SELECT 
-    entity_name, date_interval, SUM(imps), SUM(revenue)
+    entity_name, date_interval, SUM(imps) imps, SUM(revenue) rev
 FROM
     onetag.reports_daily_est
 WHERE
-    date_interval BETWEEN '2017-03-26' AND '2017-03-31'
+    date_interval BETWEEN '2017-03-28' AND '2017-03-31'
 and entity_name = 'AOL-america'
 GROUP BY date_interval , entity_name
 """
