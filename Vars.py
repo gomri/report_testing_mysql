@@ -10,13 +10,17 @@ GROUP BY date_interval , entity_name
 """
 
 query_serving_24_hours ="""
+select count(*) hours_serving
+from 
+(
 SELECT 
-    HOUR(date_interval), SUM(imps)
+    HOUR(date_interval) hours
 FROM
     reports
 WHERE
-    date_interval BETWEEN '{0}' AND '{1}'
+    date_interval BETWEEN '2017-04-15' AND '2017-04-16'
 GROUP BY 1
+) as t
 """
 # date format = '2017-04-15'
 

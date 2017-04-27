@@ -8,6 +8,10 @@ LOGGER_FILE = "logs.log"
 # Logger format
 FORMAT = "%(asctime)s - %(levelname)s - %(message)s"
 
+serving_24_expect_result = 24
+
+key_serving_24_hours = "hours_serving"
+
 DB_connection_config = {
   'user': 'omrig',
   'password': 'zUAv5hsG',
@@ -49,17 +53,27 @@ def connect_to_DB(created_connection):
     return cursor
 
 
-def execute_query(cursor,query):
+def execute_query(cursor, query):
     cursor.execute(query)
     return cursor
 
 
+def fetch_result(cursor, dict_keys):
+    serving_hours = cursor.fetchone().get(dict_keys)
+    return serving_hours
+
+
+def checking_results(expected, result):
+    if expected == result:
+        return True
+
+
 cnx = create_connection(**DB_connection_config)
 
-
 cursor = connect_to_DB(cnx)
-execute_query(cursor=cursor, query=testing)
 
+serving_24_cursor = execute_query(cursor=cursor, query=query_serving_24_hours)
 
-# for row in cursor:
-#     print "{entity_name}, {date_interval}".format(**row)
+result_24_serving = fetch_result(cursor=serving_24_cursor,dict_keys=key_serving_24_hours)
+
+print checking_results(expected=serving_24_expect_result, result=result_24_serving)
