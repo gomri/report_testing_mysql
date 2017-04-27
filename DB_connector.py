@@ -1,7 +1,12 @@
 import mysql.connector
+import logging
 from Vars import *
 from mysql.connector import errorcode
-from
+
+# Log files name
+LOGGER_FILE = "logs.log"
+# Logger format
+FORMAT = "%(asctime)s - %(levelname)s - %(message)s"
 
 DB_connection_config = {
   'user': 'omrig',
@@ -18,17 +23,21 @@ DB_cursor_config = {
 }
 
 
+# create logger
+logging.basicConfig(format=FORMAT,level=logging.DEBUG,filename=LOGGER_FILE)
+
+
 def create_connection(**args):
     try:
         cnx = mysql.connector.connect(**args)
         return cnx
     except mysql.connector.Error as err:
         if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
-            print("Something is wrong with your user name or password")
+            logging.critical("Something is wrong with your user name or password")
         elif err.errno == errorcode.ER_BAD_DB_ERROR:
-            print("Database does not exist")
+            logging.critical("Database does not exist")
         else:
-            print(err)
+            logging.critical(err)
 
 
 def close_connection(cnx):
@@ -49,7 +58,7 @@ cnx = create_connection(**DB_connection_config)
 
 
 cursor = connect_to_DB(cnx)
-print execute_query(cursor=cursor, query=testing)
+execute_query(cursor=cursor, query=testing)
 
 
 # for row in cursor:
