@@ -9,6 +9,24 @@ and entity_name = 'AOL-america'
 GROUP BY date_interval , entity_name
 """
 
+query_hourly_daily_match_hourly ="""
+SELECT 
+    SUM(imps) IMPs, SUM(revenue) Rev
+FROM
+    reports
+WHERE
+    date_interval BETWEEN '2017-04-26' AND '2017-04-26 23:59:00'
+"""
+
+query_hourly_daily_match_daily ="""
+SELECT 
+    SUM(imps) IMPs, SUM(revenue) Rev
+FROM
+    reports_daily_est
+WHERE
+    date_interval BETWEEN '2017-04-26' AND '2017-04-26 23:59:00'
+"""
+
 query_serving_24_hours ="""
 select count(*) hours_serving
 from 
