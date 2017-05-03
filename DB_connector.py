@@ -4,6 +4,8 @@ import argparse
 from Vars import *
 from mysql.connector import errorcode
 
+# TODO: Change file name to main
+
 # Log files name
 LOGGER_FILE = "logs.log"
 # Logger format
@@ -37,6 +39,8 @@ DB_cursor_config = {
 # create logger
 logging.basicConfig(format=FORMAT,level=logging.DEBUG,filename=LOGGER_FILE)
 
+
+# TODO Add date generator functions and refactor test to work with it
 
 def user_input():
     parser = argparse.ArgumentParser(description='Choose a test to run')
