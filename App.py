@@ -5,7 +5,6 @@ from datetime import *
 from Vars import *
 from mysql.connector import errorcode
 
-# TODO: Change file name to main
 
 # Log files name
 LOGGER_FILE = "logs.log"
@@ -14,31 +13,26 @@ FORMAT = "%(asctime)s - %(levelname)s - %(message)s"
 # Date format for queries
 DATE_FORMAT = '%Y-%m-%d'
 
-
-
 serving_24_massage = "24 hours serving: "
 compare_daily_hourly_massage = "Compare daily to hourly reports: "
-
-
-# TODO: think what to do about the fact i need Rev, IMPs from 2 queries maybe write a global ver (ask dror)
 
 SERVING_24_EXPECTED_HOURS = 24
 PERCENT_THRESHOLD = 0.01
 
 DB_CONNECTION_CONFIG = {
-  'user': 'omrig',
-  'password': 'zUAv5hsG',
-  'host': '10.0.32.223',
-  'database': 'onetag',
-  'raise_on_warnings': True
+    'user': 'omrig',
+    'password': 'zUAv5hsG',
+    'host': '',
+    'database': '',
+    'raise_on_warnings': True
 }
 DB_CURSOR_CONFIG = {
-    'buffered' : True,
-    'dictionary' : True
+    'buffered': True,
+    'dictionary': True
 }
 
 # create logger
-logging.basicConfig(format=FORMAT,level=logging.DEBUG,filename=LOGGER_FILE)
+logging.basicConfig(format=FORMAT, level=logging.DEBUG, filename=LOGGER_FILE)
 
 TODAY = date.today()
 
@@ -51,8 +45,8 @@ def generat_date(days_backwards):
 
 def user_input():
     parser = argparse.ArgumentParser(description='Choose a test to run')
-    parser.add_argument("-t","--test",dest="test",help='serving - 24 hours serving test'
-                                        '\ncompare_daily_hourly - Compare daily hourly rev, IMPs test',
+    parser.add_argument("-t", "--test", dest="test",
+                        help='serving - 24 hours serving test.'                  '\ncompare_daily_hourly - Compare daily hourly rev, IMPs test.',
                         required=True)
     return parser.parse_args()
 
@@ -84,13 +78,18 @@ def execute_query(cursor, query):
     return cursor
 
 
-def fetch_result(cursor):
+def fetch_one_result(cursor):
     result = cursor.fetchone()
     return result
 
 
-def diff_in_percent(num1,num2):
-    percent_diff = 100 * (num2-num1) / num1
+def fetch_many_results(cursor):
+    result = cursor.fetchall()
+    return result
+
+
+def diff_in_percent(num1, num2):
+    percent_diff = 100 * (num2 - num1) / num1
     return percent_diff
 
 
@@ -116,15 +115,15 @@ def compare_percent(threshold, result):
 # Creates connection to DB
 cnx = create_connection(**DB_CONNECTION_CONFIG)
 
-
 # Gets test to run from user via command line
 args = user_input()
 
+
 def serving_24_test():
     cursor = connect_to_DB(cnx)
-    serving_24_cursor = execute_query(cursor=cursor, query=query_serving_24_hours.format(generat_date(1),TODAY))
+    serving_24_cursor = execute_query(cursor=cursor, query=query_serving_24_hours.format(generat_date(1), TODAY))
 
-    result_24_serving = fetch_result(cursor=serving_24_cursor)
+    result_24_serving = fetch_one_result(cursor=serving_24_cursor)
     serving_hours = result_24_serving.get("hours_serving")
 
     # For testing purposes
@@ -132,7 +131,7 @@ def serving_24_test():
 
     serving_24_cursor.close()
 
-    if compare_results(SERVING_24_EXPECTED_HOURS,serving_hours):
+    if compare_results(SERVING_24_EXPECTED_HOURS, serving_hours):
         print serving_24_massage, True
     else:
         print serving_24_massage, False
@@ -142,16 +141,18 @@ def compare_daily_hourly_test():
     cursor_hourly = connect_to_DB(cnx)
     cursor_daily = connect_to_DB(cnx)
 
-    hourly_cursor = execute_query(cursor=cursor_hourly, query=query_hourly_daily_match_hourly.format(generat_date(1), TODAY))
-    daily_cursor = execute_query(cursor=cursor_daily, query=query_hourly_daily_match_daily.format(generat_date(1), TODAY))
+    cursor_hourly = execute_query(cursor=cursor_hourly,
+                                  query=query_hourly_daily_match_hourly.format(generat_date(1), TODAY))
+    cursor_daily = execute_query(cursor=cursor_daily,
+                                 query=query_hourly_daily_match_daily.format(generat_date(1), TODAY))
 
-    result_hourly = fetch_result(cursor=hourly_cursor)
-    rev_hourly = round(result_hourly.get("Rev"),2)
-    imps_hourly = round(result_hourly.get("IMPs"),2)
+    result_hourly = fetch_one_result(cursor=cursor_hourly)
+    rev_hourly = round(result_hourly.get("Rev"), 2)
+    imps_hourly = round(result_hourly.get("IMPs"), 2)
 
-    result_daily = fetch_result(cursor=daily_cursor)
-    rev_daily = round(result_daily.get("Rev"),2)
-    imps_daily = round(result_daily.get("IMPs"),2)
+    result_daily = fetch_one_result(cursor=cursor_daily)
+    rev_daily = round(result_daily.get("Rev"), 2)
+    imps_daily = round(result_daily.get("IMPs"), 2)
 
     # For testing purposes
     print "rev hourly: ", rev_hourly
@@ -160,16 +161,31 @@ def compare_daily_hourly_test():
     print "rev daily: ", rev_daily
     print "imps daily: ", imps_daily
 
-    percent_diff_rev = diff_in_percent(rev_hourly,rev_daily)
-    percent_diff_imps = diff_in_percent(imps_hourly,imps_daily)
+    percent_diff_rev = diff_in_percent(rev_hourly, rev_daily)
+    percent_diff_imps = diff_in_percent(imps_hourly, imps_daily)
 
-    hourly_cursor.close()
-    daily_cursor.close()
+    cursor_hourly.close()
+    cursor_daily.close()
 
-    if compare_percent(PERCENT_THRESHOLD, percent_diff_rev) and compare_percent(percent_threshold, percent_diff_imps):
-        print compare_daily_hourly_massage,True
+    if compare_percent(PERCENT_THRESHOLD, percent_diff_rev) and compare_percent(PERCENT_THRESHOLD, percent_diff_imps):
+        print compare_daily_hourly_massage, True
     else:
-        print compare_daily_hourly_massage,False
+        print compare_daily_hourly_massage, False
+
+
+def entity_reports():
+    cursor_entity_reports = connect_to_DB(cnx)
+
+    cursor_entity_reports = execute_query(cursor=cursor_entity_reports,
+                                          query=query_imps_rev_last_days_5.format(generat_date(5), TODAY, entity_ids))
+
+    results_entity_reports = fetch_many_results(cursor_entity_reports)
+
+    # for element in results_entity_reports:
+    #     print element.get("entity_id")
+
+    print results_entity_reports
+
 
 # TODO: option for 1 arg that will contain all test names to run in order to be able to run multiple tests.
 def main():
@@ -177,6 +193,8 @@ def main():
         serving_24_test()
     elif args.test == "compare_daily_hourly":
         compare_daily_hourly_test()
+    elif args.test == "entity_reports":
+        entity_reports()
     elif args.test == "all":
         serving_24_test()
         compare_daily_hourly_test()
