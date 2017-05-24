@@ -5,7 +5,6 @@ from datetime import *
 from Vars import *
 from mysql.connector import errorcode
 
-
 # Log files name
 LOGGER_FILE = "logs.log"
 # Logger format
@@ -20,10 +19,10 @@ SERVING_24_EXPECTED_HOURS = 24
 PERCENT_THRESHOLD = 0.01
 
 DB_CONNECTION_CONFIG = {
-    'user': 'omrig',
-    'password': 'zUAv5hsG',
-    'host': '',
-    'database': '',
+    'user': 'root',
+    'password': 'Vwt9pvrh',
+    'host': '127.0.0.1',
+    'database': 'onetag_testing',
     'raise_on_warnings': True
 }
 DB_CURSOR_CONFIG = {
@@ -46,7 +45,7 @@ def generat_date(days_backwards):
 def user_input():
     parser = argparse.ArgumentParser(description='Choose a test to run')
     parser.add_argument("-t", "--test", dest="test",
-                        help='serving - 24 hours serving test.'                  '\ncompare_daily_hourly - Compare daily hourly rev, IMPs test.',
+                        help='serving - 24 hours serving test, compare_daily_hourly - Compare daily hourly rev, IMPs test, entity_reports - check all entity reports status, all - execute all tests',
                         required=True)
     return parser.parse_args()
 
@@ -71,6 +70,11 @@ def close_connection(cnx):
 def connect_to_DB(created_connection):
     cursor = created_connection.cursor(**DB_CURSOR_CONFIG)
     return cursor
+
+
+def query_constrator(tamplate, select_fields, db_name, table_name, start_date, end_date, queryable_fields=None):
+    query = tamplate.format(select_fields, db_name, table_name, start_date.end_date)
+    return query
 
 
 def execute_query(cursor, query):
@@ -101,18 +105,17 @@ def compare_results(expected, result):
 
 
 def compare_percent(threshold, result):
-    postive_result = result * (-1)
-    if threshold > postive_result:
+s    if threshold > result:
         return True
     else:
         return False
 
 
-# def round_mum(num, num_after_zero):
-#     rounded_num = round(num, num_after_zero)
-#     return rounded_num
+def get_dalta(num1, num2):
+    delta = round(((num1 - num2) / num2) * 100, 2)
+    return delta
 
-# Creates connection to DB
+
 cnx = create_connection(**DB_CONNECTION_CONFIG)
 
 # Gets test to run from user via command line
@@ -177,14 +180,42 @@ def entity_reports():
     cursor_entity_reports = connect_to_DB(cnx)
 
     cursor_entity_reports = execute_query(cursor=cursor_entity_reports,
-                                          query=query_imps_rev_last_days_5.format(generat_date(5), TODAY, entity_ids))
+                                          query=query_imps_rev_last_days_5.format(db_name=testing_db,
+                                                                                  table_name=testing_table))
 
     results_entity_reports = fetch_many_results(cursor_entity_reports)
 
-    # for element in results_entity_reports:
-    #     print element.get("entity_id")
+    excluding_yesterday_imps = []
+    excluding_yesterday_rev = []
 
-    print results_entity_reports
+    for entity_id in entity_ids:
+        entity_data = []
+        for item in results_entity_reports:
+            if item.get("entity_id") == entity_id:
+                entity_data.append(item)
+
+        if len(entity_data) != 0:
+            yesterday = entity_data.pop()
+
+            yesterday_imps = yesterday.get("IMPs")
+            yesterday_rev = yesterday.get("Rev")
+
+            imps = 0
+            rev = 0
+            for element in entity_data:
+                imps += element.get("IMPs")
+                rev += element.get("Rev")
+
+            imps_avg = imps / len(entity_data)
+            rev_avg = rev / len(entity_data)
+
+            imps_delta = get_dalta(imps_avg, yesterday_imps)
+            rev_delta = get_dalta(rev_avg, yesterday_rev)
+
+            if compare_percent(30, imps_delta) and compare_percent(30, rev_delta):
+                print str(element.get("entity_id")) + " Full data"
+            else:
+                print str(element.get("entity_id")) + " Partial data"
 
 
 # TODO: option for 1 arg that will contain all test names to run in order to be able to run multiple tests.
